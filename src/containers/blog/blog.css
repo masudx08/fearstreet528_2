@@ -1,0 +1,60 @@
+.wrapper{
+    
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 2rem;
+
+}
+.wrapper h1{
+    font-family: var(--font-family);
+    font-size: 50px;
+    margin-bottom: 65px;
+    text-align: center;
+    padding-right: 150px; 
+}
+.accordion{
+    width:500px;
+}
+.item{
+    background: lightblue;
+    margin-bottom: 5px;
+    padding:10px 20px;
+  }
+  /*Add animation*/
+
+  .title{
+      color:purple;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor:pointer;
+  }
+  .content{
+    color: purple;
+    font-family: var(--font-family);
+    font-size: 20px;
+    max-height:0;
+    text-align: center;
+    overflow:hidden;
+    transition: all 0.5s cubic-bezier(0,1,0,1);
+  }
+
+  .content.show{
+      height:auto;
+      max-height: 9999px;
+      transition: all 0.5s cubic-bezier(1,0,1,0);
+  }
+  .wrapper .btn-area{
+    display: block;
+    background: purple;
+    color: lightblue;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    width: 200px;
+    line-height: 30px;
+    margin: 5% auto 0;
+    border-radius: 50px;
+  }

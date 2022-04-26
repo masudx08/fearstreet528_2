@@ -1,0 +1,48 @@
+.wrapper{
+    margin-top: 150px;
+    /* ff 3.6+ */
+    background:-moz-radial-gradient(circle at 57% 64%, rgba(8, 1, 70, 1) 0%, rgba(133, 19, 213, 1) 92%);
+
+    /* safari 5.1+,chrome 10+ */
+    background:-webkit-radial-gradient(circle at 57% 64%, rgba(8, 1, 70, 1) 0%, rgba(133, 19, 213, 1) 92%);
+
+    /* opera 11.10+ */
+    background:-o-radial-gradient(circle at 57% 64%, rgba(8, 1, 70, 1) 0%, rgba(133, 19, 213, 1) 92%);
+
+    /* ie 10+ */
+    background:-ms-radial-gradient(circle at 57% 64%, rgba(8, 1, 70, 1) 0%, rgba(133, 19, 213, 1) 92%);
+
+    /* global 92%+ browsers support */
+    background:radial-gradient(circle at 57% 64%, rgba(8, 1, 70, 1) 0%, rgba(133, 19, 213, 1) 92%);
+
+}
+form{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.wrapper label{
+    display: block;
+    margin: 10px 0;
+    font-family: var(--font-family);
+    font-size: 25px;
+    color: aqua;
+}
+input, textarea{
+    width:100%;
+    resize: none;
+    outline: none;
+    padding:10px
+}
+.wrapper .inputBox input { 
+    width: 100%;
+    padding:6px;
+    font-size: 16px;
+    margin:10px 0;  
+}
+.wrapper h1{
+    font-family: var(--font-family);
+    font-size: 70px;
+    margin-bottom: 65px;
+    text-align: center;
+    padding-right: 150px; 
+    font-weight: 700;
+}

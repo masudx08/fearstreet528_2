@@ -1,0 +1,8 @@
+POST http://localhost:3000/app/signup
+Content-Type: application/json
+
+{
+    "name":"Farzana",
+    "email":"Faris@gmail.com",
+    "text":"Lizards are a widespread "
+}

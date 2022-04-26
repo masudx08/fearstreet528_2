@@ -1,0 +1,45 @@
+.main{
+
+    background-color: white;
+    
+    display: flex;
+    flex-direction: column;
+    border-radius: 50px;
+    padding: 2rem;
+}
+
+.contact{
+
+    display: flex;
+    
+    align-items: flex-start;
+    flex-direction: row;
+    
+    filter: drop-shadow(0px 1px 1px rgb(143, 142, 142));
+         border-radius: 50px;
+         
+
+
+
+
+}
+.card{
+    margin: 2rem;
+    filter: drop-shadow(0px 1px 1px rgb(143, 142, 142));
+         border-radius: 50px;
+}
+.appointments{
+
+    display: flex;
+    
+    align-items: flex-start;
+    flex-direction: row;
+    
+    filter: drop-shadow(0px 1px 1px rgb(143, 142, 142));
+         border-radius: 50px;
+         
+
+
+
+
+}
