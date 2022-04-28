@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const ContactModel = require("../models/ContactModel");
 const AppointmentModel = require("../models/AppointmentModel");
-
+const jwt = require('jsonwebtoken');
+const { authorizer } = require("../middleware/middleware");
+require('dotenv').config()
 //  Contact
 router.post("/contact", (req, res) => {
   const Contact = new ContactModel({
@@ -63,4 +65,17 @@ router.delete("/appointment/:id", (req, res) => {
   });
 });
 
+router.get('/getjwt', (req, res)=>{
+  const user = JSON.parse(req.headers.user)
+  const jwtAccessToken = jwt.sign(user, process.env.JWT_SECRET)
+      res.status(200).send({
+        message: 'Successfully logged in',
+        jwtAccessToken: 'Bearer '+jwtAccessToken
+      })
+  res.send()
+})
+
+router.get('/getuser', authorizer, (req, res)=>{
+ res.send(req.user)
+})
 module.exports = router;
