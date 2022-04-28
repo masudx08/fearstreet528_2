@@ -34,7 +34,8 @@ const Signin = ({ showModal, setShowModal }) => {
     if (user) navigate("#home");
   }, [user, loading]);
 
-  const signin = () =>{
+  const signin = (e) =>{
+    e.preventDefault()
     logInWithEmailAndPassword(email,password);
   }
 
@@ -60,10 +61,10 @@ const Signin = ({ showModal, setShowModal }) => {
           >
 
             <form >
-              <h1 class='user__title'> Welcome back </h1>
+              <h1 className='user__title'> Welcome back </h1>
               <label>Email</label>
               <input
-                class="email"
+                className="email"
                 id="email"
                 type="email"
                 placeholder="Enter email"
@@ -77,7 +78,7 @@ const Signin = ({ showModal, setShowModal }) => {
 
               <label>Password </label>
               <input
-                class="password"
+                className="password"
                 type="password"
                 placeholder="Enter password"
                 value={password}
@@ -100,7 +101,7 @@ const Signin = ({ showModal, setShowModal }) => {
                 onClick={signInWithFacebook}
                 >Sign in with Facebook
                             </button>
-              <input className="btn" type="submit" value="Sign in" onClick={signin} />
+              <input className="btn" type="submit" value="Sign in" onClick={(e)=>signin(e)} />
               <button onClick={logout}>Sign out</button>
               <br />
 

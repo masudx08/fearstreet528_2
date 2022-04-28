@@ -28,8 +28,8 @@ const Blog = () => {
           </div>
   ))}
   <Link to = "newdata" target = "_blank"> 
-  <button for ="btnBox" class = "btn-area">  
-               <span class = "btn1"> Show more </span>
+  <button htmfor ="btnBox" className = "btn-area">  
+               <span className = "btn1"> Show more </span>
                </button> 
                </Link> 
       </div>

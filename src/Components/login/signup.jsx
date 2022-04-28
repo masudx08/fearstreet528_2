@@ -39,12 +39,9 @@ const Signup = ({ showModal, setShowModal }) => {
 
 
 
-    const register = () => {
-
-
+    const register = (ev) => {
+        ev.preventDefault()
         registerWithEmailAndPassword(name, email, password);
-
-
     };
 
 
@@ -66,7 +63,7 @@ const Signup = ({ showModal, setShowModal }) => {
                     >
 
                         <form >
-                            <h1 class='user__title'> Register with social media </h1>
+                            <h1 className='user__title'> Register with social media </h1>
 
                             <button
                                 className="register__btn register__google"
@@ -79,7 +76,7 @@ const Signup = ({ showModal, setShowModal }) => {
                             >Register with Facebook
                             </button>
                             
-                            <h1 class='user__title'> Register with email </h1>
+                            <h1 className='user__title'> Register with email </h1>
                             <label>Full Name</label>
                             <TextField
                                 type="text"
@@ -87,11 +84,11 @@ const Signup = ({ showModal, setShowModal }) => {
                                 value={name}
                                 placeholder="Enter Full name"
                                 onChange={(e) => setName(e.target.value)}
-                                {...register("name", {
-                                    required: true,
-                                    maxLength: 30,
-                                    pattern: /^[A-Za-z]+$/i
-                                })}
+                                // {...register("name", {
+                                //     required: true,
+                                //     maxLength: 30,
+                                //     pattern: /^[A-Za-z]+$/i
+                                // })}
                             />
                             {error?.name?.type === "required" && <p>This field is required</p>}
                             {error?.name?.type === "maxLength" && (
@@ -106,13 +103,15 @@ const Signup = ({ showModal, setShowModal }) => {
                             <label>Email</label>
                             <TextField
                                 autoComplete="off"
-                                class="email"
+                                className="email"
                                 id="email"
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter email"
-                                {...register("email", { required: true, pattern: /^\S+@\S+$/i })} />
+                                // {...register("email", { required: true, pattern: /^\S+@\S+$/i })} 
+                                />
+
                             {error?.email?.type === "required" && <p>This field is required</p>}
                             {error?.email?.type === "pattern" && (
                                 <p>Invaild email</p>
@@ -121,25 +120,23 @@ const Signup = ({ showModal, setShowModal }) => {
                             <label>Password </label>
                             <TextField
                                 autoComplete="off"
-                                class="password"
+                                className="password"
                                 type="password"
                                 placeholder="Enter password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                {...register("password",
-                                    {
-                                        required: true,
-                                        pattern: regularExpression
-                                    })} />
+                                // {...register("password",
+                                //     {
+                                //         required: true,
+                                //         pattern: regularExpression
+                                //     })} 
+                            />
                             {error?.password?.type === "required" && <p>This field is required</p>}
                             {error?.password?.type === "pattern" && (
                                 <p>password should contain atleast one number and one special characterl</p>
                             )}
 
-
-
-
-                            <input className="btn" type="submit" value="Sign up" onClick={register} />
+                            <input className="btn" type="submit" value="Sign up" onClick={(ev)=>register(ev)} />
                             <button onClick={() => setShowModal(false)}>Cancel</button>
 
 
