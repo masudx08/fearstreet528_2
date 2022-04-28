@@ -10,7 +10,9 @@ dotenv.config()
 
 mongoose.connect(process.env.DATABASE_ACCESS, ()=> console.log("Database Connected"))
 
+app.use(bodyParser.json())
 app.use(express.json())
 app.use(cors())
 app.use('/app',routesUrls)
+
 app.listen(PORT, ()=> console.log("Server is running with Port "+PORT))

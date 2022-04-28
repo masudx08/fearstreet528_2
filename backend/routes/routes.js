@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const ContactModel = require("../models/ContactModel");
 const AppointmentModel = require("../models/AppointmentModel");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 const { authorizer } = require("../middleware/middleware");
-require('dotenv').config()
+const UserModel = require("../models/UserModel");
+require("dotenv").config();
 //  Contact
 router.post("/contact", (req, res) => {
   const Contact = new ContactModel({
@@ -65,17 +66,28 @@ router.delete("/appointment/:id", (req, res) => {
   });
 });
 
-router.get('/getjwt', (req, res)=>{
+router.get("/getjwt", (req, res) => {
   const user = JSON.parse(req.headers.user)
-  const jwtAccessToken = jwt.sign(user, process.env.JWT_SECRET)
-      res.status(200).send({
-        message: 'Successfully logged in',
-        jwtAccessToken: 'Bearer '+jwtAccessToken
-      })
-  res.send()
-})
+  UserModel.findOne({email: user.email})
+  .then((result) => {
+    const {name, email, authProvider, uid, role, _id} = result
+    const jwtAccessToken = jwt.sign({name, email, authProvider, uid, role, _id}, process.env.JWT_SECRET);
+    res.status(200).send({
+      message: "Successfully logged in",
+      jwtAccessToken: "Bearer " + jwtAccessToken,
+    });
+  });
+ 
+});
 
-router.get('/getuser', authorizer, (req, res)=>{
- res.send(req.user)
-})
+router.get("/getuser", authorizer, (req, res) => {
+  console.log(req.user)
+  res.send(req.user);
+});
+router.post("/user", (req, res) => {
+  const User = new UserModel(req.body);
+  User.save().then((result) => {
+    res.send(result);
+  });
+});
 module.exports = router;

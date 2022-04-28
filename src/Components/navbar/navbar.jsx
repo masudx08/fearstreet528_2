@@ -56,8 +56,8 @@ const Navbar = () => {
           </p>
         </div>
         {
-          user ? <p>
-          <a href="/profile">Profile</a>
+          user.name ? <p>
+          <a href="/profile">{user.name}</a>
         </p>
           : 
           <div className="navbar-sign">

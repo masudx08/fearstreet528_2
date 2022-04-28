@@ -73,8 +73,16 @@ const getUser = () => {
 }
 
 
-
-
+const addUser = (data) => {
+  return fetch(backendUrl+'user', {
+    method: 'POST',
+    headers : {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res=>res.json())
+}
 
 
 
@@ -150,5 +158,6 @@ export {
   getContact, getAppointment,
   deleteContactById, deleteAppointmentById,
   getSignature,
-  getJwt, getUser
+  getJwt, getUser,
+  addUser
 }

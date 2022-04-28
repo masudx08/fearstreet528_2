@@ -15,7 +15,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
-import { getJwt } from "../../services/services";
+import { addUser, getJwt } from "../../services/services";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDT1DmFFzImV_sHOyMhaVqdqMnfXWb3cJI",
@@ -93,12 +93,23 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
+    // await addDoc(collection(db, "users"), {
+    //   uid: user.uid,
+    //   name,
+    //   authProvider: "local",
+    //   email,
+    // });
+    addUser({
       uid: user.uid,
       name,
       authProvider: "local",
       email,
-    });
+      role: 'user'
+    })
+    .then(res=>{
+      console.log(res)
+    })
+
   } catch (err) {
     
   }
