@@ -84,7 +84,15 @@ const addUser = (data) => {
   .then(res=>res.json())
 }
 
-
+const handleAppointment = (status)=>{
+  return fetch(backendUrl+'appointmentstatus', {
+    method: 'POST',
+    headers : {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(status)
+  })
+}
 
 
 
@@ -159,5 +167,5 @@ export {
   deleteContactById, deleteAppointmentById,
   getSignature,
   getJwt, getUser,
-  addUser
+  addUser, handleAppointment
 }

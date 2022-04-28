@@ -22,7 +22,8 @@ const Modal = ({ showModal, setShowModal }) => {
 
 
     const handleAppointment = data => {
-        postAppointment(JSON.stringify(data))
+        console.log(data)
+        postAppointment(JSON.stringify({...data, status:'pending'}))
     }; // your form submit function which will invoke after successful validation
 
 

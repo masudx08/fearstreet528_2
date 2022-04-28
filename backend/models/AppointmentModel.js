@@ -23,6 +23,10 @@ const appointmentModel = new mongoose.Schema({
   },
   appointmentTime:{
     type: String
+  },
+  status: {
+    // pending, approved, completed
+    type: String
   }
 });
 module.exports = mongoose.model("appointment", appointmentModel);

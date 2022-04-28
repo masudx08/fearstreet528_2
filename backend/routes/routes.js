@@ -44,6 +44,7 @@ router.post("/appointment", (req, res) => {
     schedule: req.body.schedule,
     problem: req.body.problem,
     appointmentTime: `${currentTime.toLocaleTimeString()} ${currentTime.toLocaleDateString()}`,
+    status: req.body.status
   });
   Appointment.save()
     .then((data) => {
@@ -77,7 +78,6 @@ router.get("/getjwt", (req, res) => {
       jwtAccessToken: "Bearer " + jwtAccessToken,
     });
   });
- 
 });
 
 router.get("/getuser", authorizer, (req, res) => {
@@ -89,5 +89,12 @@ router.post("/user", (req, res) => {
   User.save().then((result) => {
     res.send(result);
   });
+});
+router.post("/appointmentstatus", (req, res) => {
+  const status = req.body.status
+  AppointmentModel.findOneAndUpdate({_id:req.body.id},  { $set: { status } },)
+  .then(result=>{
+    res.send(status)
+  })
 });
 module.exports = router;
