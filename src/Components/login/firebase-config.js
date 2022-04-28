@@ -15,6 +15,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+import { getJwt } from "../../services/services";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDT1DmFFzImV_sHOyMhaVqdqMnfXWb3cJI",
@@ -76,9 +77,12 @@ const signInWithFacebook = async () => {
 
 const logInWithEmailAndPassword = async (email, password) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password)
+    const  res = await signInWithEmailAndPassword(auth, email, password)
+    getJwt(res.user)
     .then(res=>{
-      console.log(res,'login with emaiul pass')
+      document.cookie = `token=${
+        res.jwtAccessToken
+      };`
     })
   } catch (err) {
     
@@ -89,7 +93,6 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    console.log(user)
     await addDoc(collection(db, "users"), {
       uid: user.uid,
       name,

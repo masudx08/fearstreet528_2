@@ -2,6 +2,12 @@ import ZoomMtgEmbedded from '@zoomus/websdk/embedded';
 const signatureUrl = "http://localhost:4000/";
 const backendUrl = 'http://localhost:5555/app/';
 
+function cookieParser(parseIt){
+  var match = document.cookie.match(new RegExp('(^| )' + parseIt + '=([^;]+)'));
+  if(match){
+    return match[2]
+  }
+  }
 const postContact =(data)=>{
   fetch(backendUrl+'contact', {
     method : 'POST',
@@ -44,6 +50,46 @@ const deleteAppointmentById = (id) => {
   return fetch(backendUrl + 'appointment/' + id, { method: 'DELETE' })
 }
 
+
+const getJwt = (data) =>{
+ return  fetch(backendUrl+'getjwt', {
+    method: 'GET',
+    headers: {
+      user:  JSON.stringify(data)
+    }
+  }).then(res=>{
+    return res.json()
+  })
+}
+
+const getUser = () => {
+  return fetch(backendUrl+'getuser', {
+    method: 'GET',
+    headers: {
+      token: cookieParser("token"),
+    }
+  })
+  .then(res=>res.json())
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Other developers  work
 const getSignature = (meetingNumber, role, userName, userEmail, passWord, registrantToken) => {
     let data = {
         meetingNumber: meetingNumber,
@@ -103,5 +149,6 @@ export {
   postContact, postAppointment,
   getContact, getAppointment,
   deleteContactById, deleteAppointmentById,
-  getSignature
+  getSignature,
+  getJwt, getUser
 }

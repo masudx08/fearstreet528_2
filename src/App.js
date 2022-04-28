@@ -4,11 +4,17 @@ import MessengerCustomerChat from 'react-messenger-customer-chat';
 import { Appointment, Brand, Cta, Navbar } from './Components';
 import { Footer, Blog, Header, What, Possibility, Ourdoctors, ContactUs, Admin } from './containers';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Helmet } from 'react-helmet';
-
+import { getUser } from './services/services';
+import { MyContext } from './MainContext';
 const App = () => {
+    const {user, setUser} = useContext(MyContext)
     const [showModal, setShowModal] = useState(false);
+    useEffect(()=>{
+        getUser().then(res=>setUser(res))
+    },[])
+    console.log(user)
     return (
         <div className="App">
             <Helmet>
