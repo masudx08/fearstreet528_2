@@ -32,9 +32,16 @@ const Navbar = () => {
           <p>
             <a href="#home"> Home</a>
           </p>
-          <p>
+          {
+            user.role == 'reviewer' && <p>
             <a href="/control"> Admin</a>
           </p>
+          }
+          {
+            user.role == 'doctor' && <p>
+            <a href="/doctor-portal"> Admin</a>
+          </p>
+          }
           <p>
             <a href="/call">Conference</a>
           </p>

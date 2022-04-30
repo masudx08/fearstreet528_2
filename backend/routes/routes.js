@@ -43,7 +43,7 @@ router.post("/appointment", (req, res) => {
     dob: req.body.dob,
     schedule: req.body.schedule,
     problem: req.body.problem,
-    appointmentTime: `${currentTime.toLocaleTimeString()} ${currentTime.toLocaleDateString()}`,
+    appointmentTime: currentTime,
     status: req.body.status
   });
   Appointment.save()
@@ -90,7 +90,7 @@ router.post("/user", (req, res) => {
     res.send(result);
   });
 });
-
+ 
 router.post("/appointmentstatus", (req, res) => {
   const status = req.body.status
   AppointmentModel.findOneAndUpdate({_id:req.body.id},  { $set: { status } },)

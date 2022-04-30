@@ -22,7 +22,7 @@ const appointmentModel = new mongoose.Schema({
     required: true,
   },
   appointmentTime:{
-    type: String
+    type: Date
   },
   status: {
     // pending, approved, completed
