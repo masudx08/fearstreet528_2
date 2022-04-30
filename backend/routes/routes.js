@@ -90,11 +90,21 @@ router.post("/user", (req, res) => {
     res.send(result);
   });
 });
+
 router.post("/appointmentstatus", (req, res) => {
   const status = req.body.status
   AppointmentModel.findOneAndUpdate({_id:req.body.id},  { $set: { status } },)
   .then(result=>{
-    res.send(status)
+    res.send({status})
   })
 });
+
+router.post("/addmeetlink",   (req, res)=>{
+  const link = req.body.link
+  AppointmentModel.findOneAndUpdate({_id:req.body.id},  { $set: { link } },)
+  .then(result=>{
+    res.send({link})
+  })
+})
+
 module.exports = router;

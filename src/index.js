@@ -5,6 +5,7 @@ import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Admin, Zoom, Blog2 } from "./containers";
 import MainContext from "./MainContext";
+import DoctorPortal from "./Components/DoctorPortal/DoctorPortal";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,6 +13,7 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/control" element={<Admin />} />
+          <Route path="/doctor-portal" element={<DoctorPortal />} />
           <Route path="/call" element={<Zoom />} />
           <Route path="/" element={<App />}></Route>
           <Route path="/" element={<newdata />} />

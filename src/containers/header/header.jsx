@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import './header.css';
 import bg from '../../assets/bgphoto.png'
 import { AnimatePresence, motion } from 'framer-motion';
-import Appointment from '../../Components/sign/appointment.jsx'
+import Appointment from '../../Components/sign/appointment.js'
 
 const Header = () => {
   const [showModal,setShowModal]=useState(false);

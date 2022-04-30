@@ -14,17 +14,8 @@ import {
 } from "../../services/services";
 import { MyContext } from "../../MainContext";
 const Admin = () => {
-  const { user, setUser } = useContext(MyContext);
-  const [contacts, setContacts] = useState([]);
-  const [appointments, setAppointments] = useState([]);
-  useEffect(() => {
-    getContact().then((res) => {
-      setContacts(res);
-    });
-    getAppointment().then((res) => {
-      setAppointments(res);
-    });
-  }, []);
+  const { user, contacts, setContacts, appointments, setAppointments } =
+    useContext(MyContext);
 
   const deleteContact = (id) => {
     deleteContactById(id).then((res) => {
@@ -45,8 +36,7 @@ const Admin = () => {
     });
   };
   const approveAppointment = (id) => {
-    handleAppointment({id, status:'approved'})
-    .then((res) => {
+    handleAppointment({ id, status: "approved" }).then((res) => {
       if (res.status == 200) {
         const filteredAppointment = appointments.filter(
           (item) => item._id !== id
@@ -94,53 +84,72 @@ const Admin = () => {
         {appointments.length > 0 && <h3>Appointments</h3>}
 
         {appointments
-        .filter(item=>item.status !== 'approved')
-        .map((appointment, i) => {
-          return (
-            <Card key={i} className="card" sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Name: {appointment.name}
-                  </Typography>
-                  <Typography gutterBottom variant="h7" component="div">
-                    Email: {appointment.email}
-                  </Typography>
-                  <Typography gutterBottom variant="h7" component="div">
-                    Date of Birth: {appointment.dob}
-                  </Typography>
-                  {/* <Typography gutterBottom variant="h7" component="div">
+          .filter((item) => {
+            return (
+              // item.status != 'approved' && user?.role == 'reviewer' ?  true : item.email == user?.email
+              user?.role == "reviewer"
+                ? item.status != "approved"
+                : user?.role == "user" && item.email == user?.email
+            );
+          })
+          .map((appointment, i) => {
+            return (
+              <Card key={i} className="card" sx={{ maxWidth: 345 }}>
+                <CardActionArea>
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      Name: {appointment.name}
+                    </Typography>
+                    <Typography gutterBottom variant="h7" component="div">
+                      Email: {appointment.email}
+                    </Typography>
+                    <Typography gutterBottom variant="h7" component="div">
+                      Date of Birth: {appointment.dob}
+                    </Typography>
+                    {/* <Typography gutterBottom variant="h7" component="div">
                                         Gender: Male
                                     </Typography> */}
-                  <Typography gutterBottom variant="h7" component="div">
-                    Appointment Time: {appointment.appointmentTime}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Problem: {appointment.problem}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button
-                  onClick={() => deleteAppointment(appointment._id)}
-                  size="small"
-                  color="primary"
-                >
-                  Close
-                </Button>
-                {user?.role == "reviewer" && (
+                    <Typography gutterBottom variant="h7" component="div">
+                      Appointment Time: {appointment.appointmentTime}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Problem: {appointment.problem}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Status: {appointment.status}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+                {appointment.link && appointment.status !== 'completed' && (
+                  <CardActions>
+                    <a href={appointment.link} target="_blank">
+                      <Button size="small" color="primary">
+                        Meet Link
+                      </Button>
+                    </a>
+                  </CardActions>
+                )}
+                <CardActions>
                   <Button
-                    onClick={() => approveAppointment(appointment._id)}
+                    onClick={() => deleteAppointment(appointment._id)}
                     size="small"
                     color="primary"
                   >
-                    Approve
+                    Close
                   </Button>
-                )}
-              </CardActions>
-            </Card>
-          );
-        })}
+                  {user?.role == "reviewer" && (
+                    <Button
+                      onClick={() => approveAppointment(appointment._id)}
+                      size="small"
+                      color="primary"
+                    >
+                      Approve
+                    </Button>
+                  )}
+                </CardActions>
+              </Card>
+            );
+          })}
       </div>
     </div>
   );

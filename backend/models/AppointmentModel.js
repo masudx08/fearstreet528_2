@@ -27,6 +27,10 @@ const appointmentModel = new mongoose.Schema({
   status: {
     // pending, approved, completed
     type: String
+  },
+  link: {
+    // pending, approved, completed
+    type: String
   }
 });
 module.exports = mongoose.model("appointment", appointmentModel);

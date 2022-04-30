@@ -94,6 +94,16 @@ const handleAppointment = (status)=>{
   })
 }
 
+const addMeetLink = (data)=>{
+  return fetch(backendUrl+'addmeetlink', {
+    method: 'POST',
+    headers : {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then(res=>res.json())
+}
+
 
 
 
@@ -167,5 +177,6 @@ export {
   deleteContactById, deleteAppointmentById,
   getSignature,
   getJwt, getUser,
-  addUser, handleAppointment
+  addUser, handleAppointment,
+  addMeetLink
 }
