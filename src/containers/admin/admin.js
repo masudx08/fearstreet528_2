@@ -110,7 +110,10 @@ const Admin = () => {
                                         Gender: Male
                                     </Typography> */}
                     <Typography gutterBottom variant="h7" component="div">
-                      Appointment Time: {appointment.appointmentTime}
+                      Schedule Date: {new Date(appointment.scheduleDate).toDateString()}
+                    </Typography>
+                    <Typography gutterBottom variant="h7" component="div">
+                      Schedule Time: {appointment.scheduleTime}H
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Problem: {appointment.problem}

@@ -38,13 +38,8 @@ router.delete("/contact/:id", (req, res) => {
 router.post("/appointment", (req, res) => {
   const currentTime = new Date();
   const Appointment = new AppointmentModel({
-    name: req.body.name,
-    email: req.body.email,
-    dob: req.body.dob,
-    schedule: req.body.schedule,
-    problem: req.body.problem,
-    appointmentTime: currentTime,
-    status: req.body.status
+   ...req.body,
+   appointmentTime: currentTime
   });
   Appointment.save()
     .then((data) => {

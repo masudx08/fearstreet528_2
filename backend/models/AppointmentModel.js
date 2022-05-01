@@ -13,7 +13,11 @@ const appointmentModel = new mongoose.Schema({
     type: String,
     required: true,
   },
-  schedule: {
+  scheduleDate: {
+    type: String,
+    required: true,
+  },
+  scheduleTime: {
     type: String,
     required: true,
   },

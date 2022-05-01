@@ -24,6 +24,10 @@ const Modal = ({ showModal, setShowModal }) => {
     postAppointment(JSON.stringify({ ...data, status: "pending" }));
   }; // your form submit function which will invoke after successful validation
 
+  const times = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+    22, 23, 24,
+  ];
   return (
     <AnimatePresence exitBeforeEnter>
       {showModal && (
@@ -45,7 +49,7 @@ const Modal = ({ showModal, setShowModal }) => {
                 {...register("name", {
                   required: true,
                   maxLength: 20,
-                //   pattern: /^[A-Za-z]+$/i,
+                  //   pattern: /^[A-Za-z]+$/i,
                 })}
               />
               {errors?.FirstName?.type === "required" && (
@@ -84,12 +88,29 @@ const Modal = ({ showModal, setShowModal }) => {
                   required: true,
                   pattern: /^\S+@\S+$/i,
                 })}
-                value={user.email || ''}
+                value={user.email || ""}
               />
               <label>Date of Birth</label>
               <input {...register("dob", { required: true })} />
-              <label>Schedule</label>
-              <input {...register("schedule", { required: true })} />
+              <div style={{display:'flex'}}>
+              <div>
+                <label>Schedule Date</label>
+                <input
+                  {...register("scheduleDate", { required: true })}
+                  type="date"
+                />
+              </div>
+              <div>
+              <label>Schedule Time</label>
+              <select {...register("scheduleTime", { required: true })}  style={{padding: '10px'}} >
+                {times.map((time, i) => {
+                  return <option key={i} value={time}>{time}H</option>;
+                })}
+              </select>
+              </div>
+              </div>
+              
+
               <label>Your Problems</label>
               <input {...register("problem", { required: true })} />
 
